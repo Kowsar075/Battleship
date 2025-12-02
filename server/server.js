@@ -2,6 +2,7 @@ const express = require('express');
 const http = require('http');
 const socketIO = require('socket.io');
 const cors = require('cors');
+const path = require('path');
 const { log } = require('./logger');
 
 const app = express();
@@ -15,6 +16,9 @@ const io = socketIO(server, {
 
 app.use(cors());
 app.use(express.json());
+
+// Serve static files from the parent directory
+app.use(express.static(path.join(__dirname, '../')));
 
 // In-memory game storage
 const games = new Map();
@@ -46,7 +50,9 @@ app.post('/api/create-game', (req, res) => {
     createdAt: Date.now()
   });
 
-  res.json({ gameId, url: `http://localhost:3000?game=${gameId}` });
+  const protocol = req.protocol;
+  const host = req.get('host');
+  res.json({ gameId, url: `${protocol}://${host}?game=${gameId}` });
 });
 
 // Get game info

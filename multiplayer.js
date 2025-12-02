@@ -1,6 +1,11 @@
 // Socket.IO connection
 let socket = null;
-const SERVER_URL = 'http://localhost:3001';
+// Automatically detect server URL:
+// If on localhost:8080 (dev), connect to localhost:3001
+// Otherwise (ngrok/production), connect to the same origin
+const SERVER_URL = (window.location.hostname === 'localhost' && window.location.port === '8080')
+    ? 'http://localhost:3001'
+    : window.location.origin;
 
 // Initialize multiplayer connection
 function initializeMultiplayer() {
