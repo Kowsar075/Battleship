@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Battleship Game</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Main Container -->
+  <div class="container">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <h1>BATTLESHIP</h1>
+      </div>
+      <div class="controls">
+        <button id="downloadLogsBtn" class="icon-btn" title="Download Logs" onclick="downloadLogs()">
+          <span class="icon">📥</span>
+        </button>
+        <button id="soundBtn" class="icon-btn" title="Toggle Sound">
+          <span class="icon">🔊</span>
+        </button>
+        <button id="closeBtn" class="icon-btn" title="Close">
+          <span class="icon">✕</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Game Status -->
+    <div id="gameStatus" class="game-status">
+      <p id="statusText">Waiting to connect...</p>
+      <div id="timerDisplay" class="timer hidden">
+        <span id="timerText">15</span>s
+      </div>
+    </div>
+
+    <!-- Setup Phase -->
+    <div id="setupPhase" class="setup-phase">
+      <h2 class="panel-title">STRATEGY PANEL</h2>
+
+      <div class="setup-container">
+        <!-- Ship Inventory -->
+        <div class="ship-inventory">
+          <h3>Your Fleet</h3>
+          <div id="shipList" class="ship-list">
+            <!-- Ships will be added dynamically -->
+          </div>
+          <div class="inventory-controls">
+            <button id="shuffleBtn" class="control-btn">
+              <span class="icon">🔀</span>
+              Shuffle
+            </button>
+            <button id="deleteBtn" class="control-btn">
+              <span class="icon">🗑️</span>
+              Clear
+            </button>
+          </div>
+        </div>
+
+        <!-- Placement Grid -->
+        <div class="grid-container">
+          <div id="placementGrid" class="grid"></div>
+        </div>
+      </div>
+
+      <button id="readyBtn" class="ready-btn" disabled>READY</button>
+    </div>
+
+    <!-- Game Phase -->
+    <div id="gamePhase" class="game-phase hidden">
+      <div class="grids-container">
+        <!-- Your Grid -->
+        <div class="grid-section">
+          <h3>Your Fleet</h3>
+          <div id="yourGrid" class="grid"></div>
+        </div>
+
+        <!-- Opponent Grid -->
+        <div class="grid-section">
+          <h3>Enemy Waters</h3>
+          <div id="opponentGrid" class="grid"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div id="gameOverModal" class="modal hidden">
+      <div class="modal-content">
+        <h2 id="gameOverTitle">Game Over</h2>
+        <p id="gameOverMessage"></p>
+        <button id="newGameBtn" class="ready-btn">New Game</button>
+      </div>
+    </div>
+
+    <!-- Share Link Modal -->
+    <div id="shareLinkModal" class="modal hidden">
+      <div class="modal-content">
+        <h2>Share Game Link</h2>
+        <p>Send this link to your opponent:</p>
+        <div class="link-container">
+          <input type="text" id="gameLinkInput" readonly>
+          <button id="copyLinkBtn" class="control-btn">Copy</button>
+        </div>
+        <p class="info-text">Waiting for opponent to join...</p>
+        <button id="closeLinkModalBtn" class="control-btn">Close</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+  <script src="client-logger.js"></script>
+  <script src="game.js"></script>
+  <script src="multiplayer.js"></script>
+  <script src="gameplay.js"></script>
+  <script src="ui.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
