@@ -4,13 +4,6 @@ Run node server.js
 
 
 
+Open your browser and go to: http://localhost:3001
 
-Go to /home/synesis/Desktop/Battleship/server
-
-Run node frontend-server.js
-
-
-
-
-
-Open your browser and go to: http://localhost:8080
+Use ngrok to play with friends
